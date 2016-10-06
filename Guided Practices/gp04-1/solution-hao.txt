@@ -1,0 +1,14 @@
+Guided Practice 4.1
+
+Consider the following data definition:
+
+;; A ListOfStrings (LOS) is one of
+;; -- empty
+;; -- (cons String LOS)
+Which of the following expressions have values that are LOS's?
+
+(cons "abc" empty): yes
+(cons "bcd"): no
+(cons "cde" (cons "ef" empty)): yes
+(cons "3" (cons "4" empty)): yes
+(cons 3 (cons 4 empty)): no

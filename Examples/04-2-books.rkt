@@ -21,6 +21,7 @@
 ;; (define (book-fn b)
 ;;   (... (book-author b) (book-title b) (book-on-hand b) (book-price b)))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ListofBooks
 
 ;; A ListOfBooks (LOB) is either
@@ -35,6 +36,7 @@
 ;;             (book-fn (first lob))
 ;;             (lob-fn (rest lob)))]))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Inventory
 
 ;; An Inventory is a ListOfBooks.

@@ -89,3 +89,24 @@
 ;;  (list
 ;;    (make-book "Shakespeare" "Hamlet" 0 2)
 ;;    (make-book "Shakespeare" "Macbeth" 0 10))
+(define (books-out-of-stock inv)
+  (cond
+    [(empty? inv) empty]
+    [else (if (book-out-of-stock? (first inv))
+              (cons (first inv) (books-out-of-stock (rest inv)))
+              (books-out-of-stock (rest inv)))]))
+
+(define (book-out-of-stock? b)
+  (= 0 (book-on-hand b)))
+
+
+(begin-for-test
+  (check-equal? 
+    (books-out-of-stock empty)
+    empty
+    "value of the empty inventory should have been 0")
+  (check-equal?
+    (books-out-of-stock lob1)
+    (list (make-book "Shakespeare" "Hamlet" 0 2)
+    (make-book "Shakespeare" "Macbeth" 0 10)))
+    "simple test")

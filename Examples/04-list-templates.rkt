@@ -6,6 +6,24 @@
                (list-fn (rest lst)))]))
 
 
+;; remove-evens : LOI -> LOI
+(define (remove-evens lst)
+  (cond
+    [(empty? lst) empty]
+    [else (if (even? (first lst))
+              (remove-evens (rest lst))
+              (cons (first lst)
+                    (remove-evens (rest lst))))]))
+
+;; remove-evens : LOI -> LOI
+(define (remove-evens lst)
+  (cond
+    [(empty? lst) empty]
+    [(even? (first lst))
+     (remove-evens (rest lst))]
+    [else (cons (first lst)
+                (remove-evens (rest lst)))]))
+
 
 ;; A Natural Number (Nat) is one of 
 ;; -- 0

@@ -1,6 +1,6 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-intermediate-reader.ss" "lang")((modname abstractions) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ())))
+#reader(lib "htdp-intermediate-reader.ss" "lang")((modname 05-3-map) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 ;;; Examples of generalization
 
 ;;; HtDP talks about "abstraction", but we prefer the term "generalization".
@@ -38,8 +38,8 @@
 
 (begin-for-test
   (check-equal?
-    (add-1-to-each (list 22 33 44))
-    (list 23 34 45)))
+   (add-1-to-each (list 22 33 44))
+   (list 23 34 45)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -59,9 +59,6 @@
 ;;     [else (... 
 ;;             (employee-fn (first lst))
 ;;             (loe-fn (rest lst)))]))
-
-
-
 
 ;; employee-names : ListOfEmployee -> ListOfString
 ;; GIVEN: a list of employees
@@ -136,11 +133,11 @@
 
 (begin-for-test
   (check-equal?
-    (add-to-each 4 (list 20 30 40))
-    (list 24 34 44))
+   (add-to-each 4 (list 20 30 40))
+   (list 24 34 44))
   (check-equal?
-    (add-5-to-each (list 20 30 40))
-    (list 25 35 45)))
+   (add-5-to-each (list 20 30 40))
+   (list 25 35 45)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Example 2:
@@ -205,12 +202,12 @@
 ;;; Can define apply-to-each in terms of my-foldr:
 
 ;; ;; STRATEGY: Use HOF my-foldr on lox
-;; (define (apply-to-each lox fn)
-;;   (local
-;;     ((define (combiner first-guy result-on-the-rest)
-;;        (cons (fn first-guy)
-;;              result-on-the-rest)))  
-;;   (my-foldr combiner empty lox)))
+(define (apply-to-each lox fn)
+  (local
+    ((define (combiner first-guy result-on-the-rest)
+       (cons (fn first-guy)
+             result-on-the-rest)))  
+    (my-foldr combiner empty lox)))
 
 ;; Try using this definition of apply-to-each in place of the
 ;; definition above.

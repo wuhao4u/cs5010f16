@@ -38,8 +38,8 @@
 
 (begin-for-test
   (check-equal?
-   (add-1-to-each (list 22 33 44))
-   (list 23 34 45)))
+    (add-1-to-each (list 22 33 44))
+    (list 23 34 45)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -133,11 +133,11 @@
 
 (begin-for-test
   (check-equal?
-   (add-to-each 4 (list 20 30 40))
-   (list 24 34 44))
+    (add-to-each 4 (list 20 30 40))
+    (list 24 34 44))
   (check-equal?
-   (add-5-to-each (list 20 30 40))
-   (list 25 35 45)))
+    (add-5-to-each (list 20 30 40))
+    (list 25 35 45)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Example 2:
@@ -202,12 +202,12 @@
 ;;; Can define apply-to-each in terms of my-foldr:
 
 ;; ;; STRATEGY: Use HOF my-foldr on lox
-(define (apply-to-each lox fn)
-  (local
-    ((define (combiner first-guy result-on-the-rest)
-       (cons (fn first-guy)
-             result-on-the-rest)))  
-    (my-foldr combiner empty lox)))
+ (define (apply-to-each lox fn)
+   (local
+     ((define (combiner first-guy result-on-the-rest)
+        (cons (fn first-guy)
+              result-on-the-rest)))  
+   (my-foldr combiner empty lox)))
 
 ;; Try using this definition of apply-to-each in place of the
 ;; definition above.

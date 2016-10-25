@@ -1,6 +1,6 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-reader.ss" "lang")((modname 06-5-sos-and-loss) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ())))
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname 06-4-sos-and-loss) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 (require rackunit)
 (require "extras.rkt") 
 
@@ -101,8 +101,7 @@
     [else (+ (number-of-strings (first loss))
              (number-of-strings-in-loss (rest loss)))]))
 
-(begin-for-test
-  
+(begin-for-test  
   (check-equal? 
    (number-of-strings
     (list "alice" 
@@ -111,4 +110,3 @@
           "bob"))
    6)
   )
-

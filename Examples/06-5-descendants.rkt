@@ -1,11 +1,11 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-reader.ss" "lang")((modname 06-5-descendants) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f ())))
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname 06-5-descendants) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 ;; descendants-better-tests.rkt
 
 (require rackunit)
 (require rackunit/text-ui)
-
+(require "extras.rkt")
 (require "sets.rkt")
 ;; (require "extras.rkt") ; uncomment to get access to "provide"
 
@@ -102,5 +102,3 @@
 (begin-for-test
   (check set-equal? (descendants fred) (list chuck eddie alice bob dave))
   (check set-equal? (all-descendants (list chuck eddie)) (list alice bob dave)))
-
-    

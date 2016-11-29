@@ -200,9 +200,20 @@ deliverables are exactly the same, except that:
   <!-- should provide a function called <kbd>make-playground</kbd> -->
   <!-- instead.</li> -->
 
-  <li>The contract for the <kbd>run</kbd> function that you provide
-  should be <kbd>run : PosNum -> Void</kbd> instead of <kbd>run :
-  PosNum -> Metatoy</kbd>.  Note that this change relaxes the previous
+  <li>The specification for the <kbd>run</kbd> function that you
+  provide is now
+
+  <pre>
+run : PosNum -> Void
+GIVEN: a frame rate (in seconds/tick)
+EFFECT: This function creates a Container, and places a MetaToy with
+no toys in that Container.  The function may or may not put other
+Widgets and SWidgets in the container, depending on the
+implementation. The function then runs the Container at the given
+frame rate using WidgetWorks.
+</pre>
+
+ Note that this change relaxes the previous
   contract, since now any value is acceptable as a return value from
   <kbd>run</kbd>.</li>
 
@@ -212,7 +223,20 @@ deliverables are exactly the same, except that:
   href="WidgetWorks.rkt" >WidgetWorks.rkt</a> in the directory with
   your solution.  YOU MAY NOT MODIFY WidgetWorks.rkt IN ANY WAY.  WE
   MAY TEST YOUR SOLUTION WITH OUR OWN IMPLEMENTATION OF
-  <kbd>Container<%></kbd>. </p>
+<kbd>Container<%></kbd>. </p>
+
+<p><span class="strike">Hint: in the Week 10 examples, each SBall took the wall as one of
+its init-fields, and registered itself with the wall during its
+initialization.  The contracts in ps09 rule out an analogous
+"self-registration" strategy here.  So you will have to make the
+object that creates the toys subscribe each toy to the relevant
+notification or notifications. Be sure you can explain your
+registration strategy at codewalk. If this hint is mysterious when you
+read it, check back when you try to implement
+<kbd>make-throbber</kbd>, etc.</span>  <span class="new"><strong>ADDED
+MON 11/21/16:</strong>  Now that I look at it, I think this hint is
+more misleading than helpful.  So you can safely ignore it.  See
+@1044.  Sorry about that. -Prof. Wand</span></p>
 
 
   </li>
@@ -224,8 +248,8 @@ deliverables are exactly the same, except that:
 
   <ol><p/>
 
-    <li>The toy consists of a canvas that is 600 pixels high and 500
-    pixels wide.</li>
+    <li>The toy consists of a canvas that is 600 pixels wide and 500
+    pixels high.</li>
 
     <li>When the child types "b", a new block pops up on the screen
     at the location of the last button-down or button-up.  The block appears as a 20x20
@@ -281,7 +305,7 @@ GIVEN: no arguments
 RETURNS: a Container, initially with no blocks, which when run, will
 run in a 600x500 canvas and process the events in the description above.
 
-make-block : NonNegInt NonNegInt ListOfBlock -> SBlock
+make-block : NonNegInt NonNegInt ListOfSBlock -> SBlock
 GIVEN: an x and y position, and a list of blocks
 WHERE: the list of blocks is the list of blocks already on the playground.
 RETURNS: a new block, at the given position, with no teammates
@@ -292,7 +316,7 @@ You must provide an interface named SBlock<%>.  Your SBlock<%>
 interface should inherit from the SWidget<%> interface and add AT
 LEAST the following methods:
 
-get-team : -> ListOfSBlock<%>
+get-team : -> ListOfSBlock
 RETURNS: the teammates of this sblock
 
 add-teammate: SBlock -> Void
@@ -367,6 +391,6 @@ rules:
 <font size=-1>
 <p align=right>
 <!-- hhmts start -->
-Last modified: Wed Nov 16 13:31:32 Eastern Standard Time 2016 <!-- hhmts end -->
+Last modified: Mon Nov 21 08:52:52 Eastern Standard Time 2016 <!-- hhmts end -->
 </body> </html>
  

@@ -1,11 +1,25 @@
 #lang racket
 
 (require rackunit)
+(require "extras.rkt")
+
+(define version "Sat Nov 19 15:07:54 2016")
+
+(printf "PerfectBounce.rkt ~a~n" version)
 
 (provide
   (struct-out particle)
-  (struct-out rect)
-  particle-after-tick)
+  (struct-out rect))
+
+(provide
+ (contract-out
+  [particle-after-tick
+   (->i ([p particle?][r rect?])
+        #:pre (p r) (particle-inside? p r)
+        [result particle?])]))
+
+
+         
 
 ;; computing the geometry of a perfect bounce
 
@@ -27,6 +41,29 @@
 (define-struct rect (xmin xmax ymin ymax) #:transparent)
 ;; all fields are Real.
 ;; We assume xmin < xmax, ymin < ymax.
+;; Furthermore, we assume that the particle is either inside the
+;; rectangle or is at the wall and travelling inward.
+;; The specifications for the drag operation are supposed to ensure
+;; this.
+
+(define (particle-inside? p r)
+  (let ((px (particle-x p))
+        (py (particle-y p))
+        (vx (particle-vx p))
+        (vy (particle-vy p))
+        (xmin (rect-xmin r))
+        (xmax (rect-xmax r))
+        (ymin (rect-ymin r))
+        (ymax (rect-ymax r)))
+    (and
+     (or (< xmin px xmax)
+         (and (= px xmin) (>= vx 0))
+         (and (= px xmax) (<= vx 0)))
+     (or (< ymin py ymax)
+         (and (= py ymin) (>= vy 0))
+         (and (= py ymax) (<= vy 0))))))
+  
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -170,20 +207,22 @@
 (define rect2 (make-rect 0  20 0 150))
 (define rect3 (make-rect 0  25 0 150))
 
-;; particle bounces off y = 0
-(check-equal?
-  (particle-after-tick particle1 rect1)
-  (make-particle 25 0 30 40))
-
-;; particle bounces off x = 20
-(check-equal?
-  (particle-after-tick particle1 rect2)
-  (make-particle 20 (- 20 40/3) -30 -40))
-
-;; the particle bounces off y = 0 at the corner x = 25
-(check-equal?
-  (particle-after-tick particle1 rect3)
-  (make-particle 25 0 -30 40))
+#;(begin-for-test
+    ;; particle bounces off y = 0
+    (check-equal?
+     (particle-after-tick particle1 rect1)
+     (make-particle 25 0 30 40))
+    
+    ;; particle bounces off x = 20
+    (check-equal?
+     (particle-after-tick particle1 rect2)
+     (make-particle 20 (- 20 40/3) -30 -40))
+    
+    ;; the particle bounces off y = 0 at the corner x = 25
+    (check-equal?
+     (particle-after-tick particle1 rect3)
+     (make-particle 25 0 -30 40))
+    )
  
 
 

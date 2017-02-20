@@ -5,6 +5,9 @@
 (require "Model.rkt")
 (require "ControllerFactory.rkt")
 
+(define CANVAS-WIDTH 600)
+(define CANVAS-HEIGHT 500)
+
 ;; run with (run 0.5)
 
 (define CANVAS-WIDTH 600)
